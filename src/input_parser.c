@@ -18,13 +18,11 @@ t_map	*read_file(int fd)
 {
 	t_map	*map;
 	int		i;
-	int		count;
 	char	*temp;
 
 	if (fd < 0)
 		ft_error("Error opening file\n");
 	i = 0;
-	count = 0;
 	map = malloc(sizeof(t_map));
 	if (!map)
 		ft_error("Memory allocation failed\n");
@@ -34,19 +32,19 @@ t_map	*read_file(int fd)
 		free(map);
 		ft_error("Memory allocation failed\n");
 	}
+	map->num_line = 0;
 	while (1)
 	{
 		temp = get_next_line(fd);
-		// ft_printf("GOt a line\n");
 		if (!temp)
 			break ;
 		map->line[i] = ft_strtrim(temp, "\n");
 		free(temp);
-		count++;
+		map->num_line++;
 		i++;
 	}
 	map->line[i] = NULL;
-	if (count <= 2)
+	if (map->num_line <= 2)
 	{
 		free_whole_line(map->line);
 		free(map);
@@ -115,6 +113,12 @@ int	check_map(char *filename)
 		free_whole_line(map->line);
 		free(map);
 		ft_error("Invalid Map Format\n");
+	}
+	if (check_border(map) != 0)
+	{
+		free_whole_line(map->line);
+		free(map);
+		ft_error("Walls are not good");
 	}
 	close(fd);
 	return (0);
