@@ -1,16 +1,11 @@
 #include "so_long.h"
 
-int ft_error(const char *msg)
-{
-	ft_printf(msg);
-	exit(1);
-}
-
 int	main(int ac, char *av[])
 {
 	if (ac != 2)
 		ft_error("Invalid Number of Arguments\n");
-	
+	if (check_map(av[1]) != 0)
+		ft_error("Invalid Map\n");
 	t_mlx_data	*ptr;
 	ptr = NULL;
 	if(initialize_mlx(&ptr) != 0)
