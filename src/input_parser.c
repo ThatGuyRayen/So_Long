@@ -3,6 +3,7 @@
 int	check_extension(char *filename)
 {
 	int	len;
+
 	if (!filename)
 		ft_error("Filename is Invalid\n");
 	len = ft_strlen(filename);
@@ -11,15 +12,15 @@ int	check_extension(char *filename)
 	if (ft_strncmp(filename + len - 4, ".ber", 4) != 0)
 		return (-1);
 	return (0);
-} 
+}
 
-t_map  	*read_file(int fd)
+t_map	*read_file(int fd)
 {
 	t_map	*map;
-	int	i;
-	int	count;
+	int		i;
+	int		count;
 	char	*temp;
-	
+
 	if (fd < 0)
 		ft_error("Error opening file\n");
 	i = 0;
@@ -35,11 +36,10 @@ t_map  	*read_file(int fd)
 	}
 	while (1)
 	{
-			
 		temp = get_next_line(fd);
-		//ft_printf("GOt a line\n");
+		// ft_printf("GOt a line\n");
 		if (!temp)
-			break;
+			break ;
 		map->line[i] = ft_strtrim(temp, "\n");
 		free(temp);
 		count++;
@@ -51,19 +51,20 @@ t_map  	*read_file(int fd)
 		free_whole_line(map->line);
 		free(map);
 		ft_error("Map is too small\n");
-	}	
+	}
 	return (map);
 }
 
 int	check_rectangle(t_map *map)
 {
-	int	i;
+	int		i;
 	size_t	line_length;
+
 	i = 0;
 	if (!map || !map->line)
 		return (-1);
 	line_length = ft_strlen(map->line[0]);
-	while(map->line[i])
+	while (map->line[i])
 	{
 		if (ft_strlen(map->line[i]) != line_length)
 			return (-1);
@@ -76,6 +77,7 @@ int	check_line_content(t_map *map)
 {
 	int	i;
 	int	j;
+
 	if (!map || !map->line)
 		return (-1);
 	i = 0;
@@ -84,9 +86,9 @@ int	check_line_content(t_map *map)
 		j = 0;
 		while (map->line[i][j])
 		{
-			if (map->line[i][j] != '0' && map->line[i][j] != '1' &&
-				map->line[i][j] != 'C' && map->line[i][j] != 'E' &&
-				map->line[i][j] != 'P')
+			if (map->line[i][j] != '0' && map->line[i][j] != '1'
+				&& map->line[i][j] != 'C' && map->line[i][j] != 'E'
+				&& map->line[i][j] != 'P')
 			{
 				return (-1);
 			}
@@ -97,9 +99,9 @@ int	check_line_content(t_map *map)
 	return (0);
 }
 
-int check_map(char *filename)
+int	check_map(char *filename)
 {
-	int	fd;
+	int		fd;
 	t_map	*map;
 
 	if (check_extension(filename) != 0)
@@ -108,8 +110,7 @@ int check_map(char *filename)
 	if (fd < 0)
 		ft_error("Error opening file\n");
 	map = read_file(fd);
-	if (!map || check_rectangle(map) != 0 ||
-		check_line_content(map) != 0)
+	if (!map || check_rectangle(map) != 0 || check_line_content(map) != 0)
 	{
 		free_whole_line(map->line);
 		free(map);
@@ -118,4 +119,3 @@ int check_map(char *filename)
 	close(fd);
 	return (0);
 }
-
