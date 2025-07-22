@@ -17,6 +17,7 @@ typedef struct s_mlx_data
 typedef struct s_map
 {
 	char	**line;
+	int	num_line;
 	int		width;
 	int		height;
 	int		player;
@@ -29,9 +30,17 @@ int			initialize_mlx(t_mlx_data **ptr);
 int			handle_input(int keysym, t_mlx_data *ptr);
 int			ft_error(const char *msg);
 void		free_whole_line(char **line);
+
+//to check map's boarder
+int	check_line_one(char *line);
+int	check_line_two(char *line);
+int 	check_border(t_map *map);
+
+//to check validity of map in general
 int			check_extension(char *filename);
 t_map		*read_file(int fd);
 int			check_rectangle(t_map *map);
 int			check_line_content(t_map *map);
 int			check_map(char *filename);
+
 #endif
