@@ -18,7 +18,8 @@ t_map  	*read_file(int fd)
 	t_map	*map;
 	int	i;
 	int	count;
-
+	char	*temp;
+	
 	if (fd < 0)
 		ft_error("Error opening file\n");
 	i = 0;
@@ -34,9 +35,13 @@ t_map  	*read_file(int fd)
 	}
 	while (1)
 	{
-		map->line[i] = get_next_line(fd);
-		if (!map->line[i])
+			
+		temp = get_next_line(fd);
+		//ft_printf("GOt a line\n");
+		if (!temp)
 			break;
+		map->line[i] = ft_strtrim(temp, "\n");
+		free(temp);
 		count++;
 		i++;
 	}
@@ -103,8 +108,8 @@ int check_map(char *filename)
 	if (fd < 0)
 		ft_error("Error opening file\n");
 	map = read_file(fd);
-	if (!map || !check_rectangle(map) ||
-		!check_line_content(map))
+	if (!map || check_rectangle(map) != 0 ||
+		check_line_content(map) != 0)
 	{
 		free_whole_line(map->line);
 		free(map);
