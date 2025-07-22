@@ -1,22 +1,22 @@
-# Project Name
+#Project Name
 NAME = so_long
 
-# Compiler & Flags
+#Compiler &Flags
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -O3 -I. -Iminilibx-linux -I/usr/include 
+CFLAGS = -Wall -Wextra -Werror -O3 -I. -Iminilibx-linux -I/usr/include
 
-# Linker Flags
+#Linker Flags
 LFLAGS = -Lminilibx-linux -lmlx -L/usr/lib -lXext -lX11 -lm -lz
 
-# Directories
+#Directories
 SRC_DIR = src
 OBJ_DIR = obj
 LIBFT_DIR = libft
 INCLUDES = -Iinclude
-# Libft
+#Libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
-# Source & Object files
+#Source &Object files
 SRCS = $(wildcard $(SRC_DIR)/*.c)
 OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 

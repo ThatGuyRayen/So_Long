@@ -20,7 +20,6 @@ int	initialize_mlx(t_mlx_data **ptr)
 	return (0);
 }
 
-
 int	handle_input(int keysym, t_mlx_data *ptr)
 {
 	if (keysym == XK_Escape)
@@ -35,5 +34,3 @@ int	handle_input(int keysym, t_mlx_data *ptr)
 	ft_printf("The %d key has been presses\n", keysym);
 	return (0);
 }
-
-
