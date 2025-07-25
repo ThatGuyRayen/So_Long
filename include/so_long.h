@@ -26,15 +26,22 @@ typedef struct s_map
 	int		num_player;
 }			t_map;
 
+
+
+void	init_map(t_map *map);
 int			initialize_mlx(t_mlx_data **ptr);
 int			handle_input(int keysym, t_mlx_data *ptr);
 int			ft_error(const char *msg);
 void		free_whole_line(char **line);
 
+
+
 //to check map's boarder
 int	check_line_one(char *line);
 int	check_line_two(char *line);
 int 	check_border(t_map *map);
+t_map	*get_no_of_entities(t_map *map);
+int	content_checker(t_map *map);
 
 //to check validity of map in general
 int			check_extension(char *filename);
