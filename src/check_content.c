@@ -12,7 +12,11 @@ t_map	*get_no_of_entities(t_map *map)
 		while (map->line[i][j])
 		{
 			if (map->line[i][j] == 'P')
+			{
 				map->num_player++;
+				map-> row = i;
+				map->col = j;
+			}
 			else if (map->line[i][j] == 'C')
 				map->num_collectibles++;
 			else if (map->line[i][j] == 'E')

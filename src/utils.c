@@ -9,6 +9,8 @@ void	init_map(t_map *map)
 	map->num_line = 0;
 	map->width = 0;
 	map->height = 0;
+	map->col = 0;
+	map->row = 0;
 }
 
 
