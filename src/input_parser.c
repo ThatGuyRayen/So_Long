@@ -26,6 +26,7 @@ t_map	*read_file(int fd)
 	map = malloc(sizeof(t_map));
 	if (!map)
 		ft_error("Memory allocation failed\n");
+	init_map(map);
 	map->line = malloc(sizeof(char *) * 200);
 	if (!map->line)
 	{
@@ -119,6 +120,12 @@ int	check_map(char *filename)
 		free_whole_line(map->line);
 		free(map);
 		ft_error("Walls are not good");
+	}
+	if (content_checker(map) != 0)
+	{
+		free_whole_line(map->line);
+		free(map);
+		ft_error("Content is Corrupeted");
 	}
 	close(fd);
 	return (0);
