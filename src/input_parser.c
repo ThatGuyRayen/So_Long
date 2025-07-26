@@ -127,6 +127,12 @@ int	check_map(char *filename)
 		free(map);
 		ft_error("Content is Corrupeted");
 	}
+	if (check_path(map) != 0)
+	{
+		free_whole_line(map->line);
+		free(map);
+		ft_error("No valid path found ");
+	}
 	close(fd);
 	return (0);
 }

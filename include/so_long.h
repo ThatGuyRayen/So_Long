@@ -33,6 +33,11 @@ int			initialize_mlx(t_mlx_data **ptr);
 int			handle_input(int keysym, t_mlx_data *ptr);
 int			ft_error(const char *msg);
 void		free_whole_line(char **line);
+//to check valid path
+int	fill(char **map, int row, int col, int max_rows);
+char	**clone_map(char **src, int height);
+int	check_path(t_map *map);
+
 
 // to check map's boarder
 int			check_line_one(char *line);
