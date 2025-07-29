@@ -17,10 +17,24 @@ typedef struct s_mlx_data
 	int	endian;
 }			t_mlx_data;
 
+typedef struct s_tiles {
+	void	*top_left;
+	void	*top_mid;
+	void	*top_right;
+	void	*mid_left;
+	void	*center;
+	void	*mid_right;
+	void	*bot_left;
+	void	*bot_mid;
+	void	*bot_right;
+}	t_tiles;
+
+
 typedef struct s_map
 {
 	char	**line;
 	int		num_line;
+	int		num_col;
 	int		width;
 	int		height;
 	int		player;
