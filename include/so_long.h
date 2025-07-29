@@ -1,8 +1,8 @@
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-# define IMG_H 400
-# define IMG_W 400
+# define WIN_WIDTH 1280
+# define WIN_HEIGHT 720
 # define TILE_SIZE 32
 # include "libft/libft.h"
 # include "mlx.h"
@@ -50,7 +50,7 @@ typedef struct s_map
 
 
 void		init_map(t_map *map);
-int			initialize_mlx(t_mlx_data **ptr, t_map *map);
+int			initialize_mlx(t_mlx_data **ptr);
 int			handle_input(int keysym, t_mlx_data *ptr);
 int			ft_error(const char *msg);
 void		free_whole_line(char **line);
@@ -80,7 +80,7 @@ t_map			*check_map(char *filename);
 
 //loading backgroud
 void	load_background_tiles(t_mlx_data *mlx);
-void	draw_background_tile(t_mlx_data *mlx, int x, int y,int max_x, int max_y);
-void	render_background(t_mlx_data *mlx, t_map *map);
+void	draw_background_tile(t_mlx_data *mlx, int x, int y);
+void	render_background(t_mlx_data *mlx);
 
 #endif

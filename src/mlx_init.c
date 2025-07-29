@@ -1,6 +1,6 @@
 #include "so_long.h"
 
-int	initialize_mlx(t_mlx_data **ptr, t_map *map)
+int	initialize_mlx(t_mlx_data **ptr)
 {
 	*ptr = malloc(sizeof(t_mlx_data));
 	if (!ptr)
@@ -12,7 +12,7 @@ int	initialize_mlx(t_mlx_data **ptr, t_map *map)
 		return (1);
 	}
 	(*ptr)->win_ptr = mlx_new_window((*ptr)->mlx_ptr,
-			map->num_col * TILE_SIZE, map->num_line * TILE_SIZE, "Game");
+			WIN_WIDTH, WIN_HEIGHT, "Game");
 	if ((*ptr)->win_ptr == NULL)
 	{
 		mlx_destroy_display((*ptr)->mlx_ptr);

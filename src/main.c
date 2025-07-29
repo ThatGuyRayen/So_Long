@@ -11,7 +11,7 @@ int	main(int ac, char *av[])
 	if (!map)
 		ft_error("Not a good map");
 	ptr = NULL;
-	if (initialize_mlx(&ptr, map) != 0)
+	if (initialize_mlx(&ptr) != 0)
 		return (1);
 	load_background_tiles(ptr);
 	render_background(ptr, map);
