@@ -50,8 +50,7 @@ typedef struct s_map
 
 
 void		init_map(t_map *map);
-int	width_cal(char **line);
-int			initialize_mlx(t_mlx_data **ptr);
+int			initialize_mlx(t_mlx_data **ptr, t_map *map);
 int			handle_input(int keysym, t_mlx_data *ptr);
 int			ft_error(const char *msg);
 void		free_whole_line(char **line);
@@ -76,7 +75,7 @@ int			check_extension(char *filename);
 t_map		*read_file(int fd);
 int			check_rectangle(t_map *map);
 int			check_line_content(t_map *map);
-int			check_map(char *filename);
+t_map			*check_map(char *filename);
 
 
 //loading backgroud

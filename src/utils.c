@@ -1,18 +1,5 @@
 #include "so_long.h"
 
-
-int	width_cal(char **line)
-{
-	int	j;
-	int	count;
-
-	count = 0;
-	j = 0;
-	while (line[0][j++] != '\0')
-		count++;
-	return (count);
-}
-
 void	init_map(t_map *map)
 {
 	map->num_col = 0;

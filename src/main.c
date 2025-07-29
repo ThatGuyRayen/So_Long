@@ -3,14 +3,18 @@
 int	main(int ac, char *av[])
 {
 	t_mlx_data	*ptr;
-
+	t_map	*map;
 	if (ac != 2)
 		ft_error("Invalid Number of Arguments\n");
-	if (check_map(av[1]) != 0)
-		ft_error("Invalid Map\n");
+	map = NULL;
+	map = check_map(av[1]);
+	if (!map)
+		ft_error("Not a good map");
 	ptr = NULL;
-	if (initialize_mlx(&ptr) != 0)
+	if (initialize_mlx(&ptr, map) != 0)
 		return (1);
+	load_background_tiles(ptr);
+	render_background(ptr, map);
 	mlx_key_hook(ptr->win_ptr, handle_input, ptr);
 	mlx_loop(ptr->mlx_ptr);
 	mlx_destroy_window(ptr->mlx_ptr, ptr->win_ptr);

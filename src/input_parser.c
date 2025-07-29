@@ -45,6 +45,7 @@ t_map	*read_file(int fd)
 		i++;
 	}
 	map->line[i] = NULL;
+	map->num_col = ft_strlen(map->line[0]);
 	if (map->num_line <= 2)
 	{
 		free_whole_line(map->line);
@@ -98,7 +99,7 @@ int	check_line_content(t_map *map)
 	return (0);
 }
 
-int	check_map(char *filename)
+t_map	*check_map(char *filename)
 {
 	int		fd;
 	t_map	*map;
@@ -134,5 +135,5 @@ int	check_map(char *filename)
 		ft_error("No valid path found ");
 	}
 	close(fd);
-	return (0);
+	return (map);
 }
