@@ -14,7 +14,7 @@ int	main(int ac, char *av[])
 	if (initialize_mlx(&ptr) != 0)
 		return (1);
 	load_background_tiles(ptr);
-	render_background(ptr, map);
+	render_background(ptr);
 	mlx_key_hook(ptr->win_ptr, handle_input, ptr);
 	mlx_loop(ptr->mlx_ptr);
 	mlx_destroy_window(ptr->mlx_ptr, ptr->win_ptr);
