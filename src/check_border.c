@@ -35,11 +35,12 @@ int	check_border(t_map *map)
 	len = 0;
 	while (map->line[i])
 	{
-		if (check_line_one(map->line[0]) != 0 || check_line_one(map->line[map->num_line - 1]) != 0)
+		if (check_line_one(map->line[0]) != 0
+			|| check_line_one(map->line[map->num_line - 1]) != 0)
 			ft_error("Walls are not looking Good");
 		if (check_line_two(map->line[i]) != 0)
 			ft_error("walls in Middle are not looking Good");
-		i++;	
+		i++;
 	}
 	return (0);
 }

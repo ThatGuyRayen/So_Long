@@ -1,9 +1,18 @@
 #include "so_long.h"
 
+
+void	render_game(t_mlx_data *mlx, t_player *player)
+{
+	render_player(mlx, player);
+}
+
+
 int	main(int ac, char *av[])
 {
 	t_mlx_data	*ptr;
-	t_map	*map;
+	t_map		*map;
+	t_player	*player = malloc(sizeof(t_player));
+
 	if (ac != 2)
 		ft_error("Invalid Number of Arguments\n");
 	map = NULL;
@@ -13,9 +22,9 @@ int	main(int ac, char *av[])
 	ptr = NULL;
 	if (initialize_mlx(&ptr) != 0)
 		return (1);
-	load_background_tiles(ptr);
-	render_background(ptr);
-	mlx_key_hook(ptr->win_ptr, handle_input, ptr);
+	init_player(player, map);
+	render_player(ptr, player);
+	mlx_key_hook(ptr->win_ptr, handle_input, (void *)ptr);
 	mlx_loop(ptr->mlx_ptr);
 	mlx_destroy_window(ptr->mlx_ptr, ptr->win_ptr);
 	mlx_destroy_display(ptr->mlx_ptr);

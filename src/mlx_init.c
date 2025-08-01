@@ -23,7 +23,7 @@ int	initialize_mlx(t_mlx_data **ptr)
 	return (0);
 }
 
-int	handle_input(int keysym, t_mlx_data *ptr)
+int	handle_input(int keysym, t_mlx_data *ptr, t_map *map, t_player *player)
 {
 	if (keysym == XK_Escape)
 	{
@@ -34,6 +34,22 @@ int	handle_input(int keysym, t_mlx_data *ptr)
 		free(ptr);
 		exit(1);
 	}
-	ft_printf("The %d key has been presses\n", keysym);
+	if (keysym == 119 && map->line[player->y - 1][player->x] != '1' && player->y > 0)
+		player->y--;
+
+	// Move down (S)
+	else if (keysym == 115 && map->line[player->y + 1][player->x] != '1' && player->y < map->num_line - 1)
+		player->y++;
+
+	// Move left (A)
+	else if (keysym == 97 && map->line[player->y][player->x - 1] != '1' && player->x > 0)
+		player->x--;
+
+	// Move right (D)
+	else if (keysym == 100 && map->line[player->y][player->x + 1] != '1' && player->x < map->num_col - 1)
+		player->x++;
+
+	// After movement, redraw the game (map + player)
+	render_game(ptr, player);
 	return (0);
 }

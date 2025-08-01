@@ -14,7 +14,7 @@ t_map	*get_no_of_entities(t_map *map)
 			if (map->line[i][j] == 'P')
 			{
 				map->num_player++;
-				map-> row = i;
+				map->row = i;
 				map->col = j;
 			}
 			else if (map->line[i][j] == 'C')
@@ -24,10 +24,9 @@ t_map	*get_no_of_entities(t_map *map)
 			j++;
 		}
 		i++;
-	}	
+	}
 	return (map);
 }
-
 
 int	content_checker(t_map *map)
 {

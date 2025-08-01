@@ -14,6 +14,12 @@ void	init_map(t_map *map)
 	map->row = 0;
 }
 
+void	init_player(t_player *player, t_map *map)
+{
+	player->idle = NULL;
+	player->x = map->col;
+	player->y = map->row;
+}
 
 int	ft_error(const char *msg)
 {
