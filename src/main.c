@@ -23,6 +23,7 @@ int	main(int ac, char *av[])
 	if (initialize_mlx(&ptr) != 0)
 		return (1);
 	init_player(player, map);
+	load_player_sprites(ptr, player);
 	render_player(ptr, player);
 	mlx_key_hook(ptr->win_ptr, handle_input, (void *)ptr);
 	mlx_loop(ptr->mlx_ptr);

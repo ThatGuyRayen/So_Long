@@ -3,7 +3,7 @@
 int	initialize_mlx(t_mlx_data **ptr)
 {
 	*ptr = malloc(sizeof(t_mlx_data));
-	if (!ptr)
+	if (!*ptr)
 		return (1);
 	(*ptr)->mlx_ptr = mlx_init();
 	if ((*ptr)->mlx_ptr == NULL)

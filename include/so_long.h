@@ -16,7 +16,6 @@ typedef struct s_tiles
 typedef struct s_player
 {
 	void	*idle;
-	void	*walk[15];
 	int		x;
 	int		y;
 	int		frame;
@@ -30,6 +29,8 @@ typedef struct s_map
 	int		width;
 	int		height;
 	int		player;
+	int		player_x;
+	int		player_y;
 	int		num_exits;
 	int		num_collectibles;
 	int		num_player;
