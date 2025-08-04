@@ -53,7 +53,8 @@ typedef struct s_mlx_data
 
 void		init_map(t_map *map);
 int			initialize_mlx(t_mlx_data **ptr);
-int	handle_input(int keysym, t_mlx_data *ptr, t_map *map, t_player *player);
+int	handle_input(int keycode, void *param);
+int			ft_error(const char *msg);
 int			ft_error(const char *msg);
 void		free_whole_line(char **line);
 
@@ -83,9 +84,5 @@ void		render_background(t_mlx_data *mlx);
 
 
 //
-void	load_player_sprites(t_mlx_data *ptr, t_player *player);
-void	render_player(t_mlx_data *mlx, t_player *player);
-void	init_player(t_player *player, t_map *map);
-void	render_game(t_mlx_data *mlx, t_player *player);
 
 #endif
