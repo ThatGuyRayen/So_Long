@@ -8,9 +8,19 @@ void	init_map(t_map *map)
 	map->num_collectibles = 0;
 	map->line = NULL;
 	map->num_line = 0;
-	map->height = 0;
 	map->col = 0;
 	map->row = 0;
+	map->img_width = 32;
+	map->img_height = 32;
+}
+
+void	init_imgs(t_img *img, t_map *map)
+{
+	img->player_img = 0;
+	img->collect_img = 0;
+	img->bg_img = 0;
+	img->exit_img[0] = 0;
+	img->exit_img[1] = 0;
 }
 
 int	ft_error(const char *msg)
