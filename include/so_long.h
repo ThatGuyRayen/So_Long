@@ -3,7 +3,7 @@
 
 # define WIN_WIDTH 1280
 # define WIN_HEIGHT 720
-# define TILE_SIZE 64
+# define WALL_SIZE 32
 # include "libft/libft.h"
 # include "mlx.h"
 # include <X11/keysym.h>
@@ -15,10 +15,9 @@ typedef struct s_tiles
 
 typedef struct s_player
 {
-	void	*idle;
+	void	*img;
 	int		x;
 	int		y;
-	int		frame;
 }			t_player;
 
 typedef struct s_map
@@ -26,16 +25,15 @@ typedef struct s_map
 	char	**line;
 	int		num_line;
 	int		num_col;
-	int		width;
 	int		height;
 	int		player;
-	int		player_x;
-	int		player_y;
 	int		num_exits;
 	int		num_collectibles;
 	int		num_player;
 	int		row;
 	int		col;
+	int		tile_size;
+	void		*wall;
 }			t_map;
 
 
@@ -78,11 +76,9 @@ int			check_line_content(t_map *map);
 t_map		*check_map(char *filename);
 
 // loading backgroud
-void		load_background_tiles(t_mlx_data *mlx);
-void		draw_background_tile(t_mlx_data *mlx, int x, int y);
-void		render_background(t_mlx_data *mlx);
+
+// loading player
 
 
-//
 
 #endif
