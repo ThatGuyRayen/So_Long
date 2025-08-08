@@ -1,60 +1,83 @@
-#include "so_long.h"
 
-void	init_map(t_map *map)
+#include "../includes/so_long.h"
+
+int	count_lines(char *av)
 {
-	map->num_col = 0;
-	map->num_player = 0;
-	map->num_exits = 0;
-	map->num_collectibles = 0;
-	map->line = NULL;
-	map->num_line = 0;
-	map->col = 0;
-	map->row = 0;
-	map->img_width = 32;
-	map->img_height = 32;
-}
+	char	*line;
+	int		i;
+	int		fd;
 
-void	init_imgs(t_img *img, t_map *map)
-{
-	img->player_img = 0;
-	img->collect_img = 0;
-	img->bg_img = 0;
-	img->exit_img[0] = 0;
-	img->exit_img[1] = 0;
-}
-
-int	ft_error(const char *msg)
-{
-	ft_printf(msg);
-	exit(1);
-}
-
-void	free_whole_line(char **line)
-{
-	int	i;
-
-	if (!line)
-		return ;
 	i = 0;
-	while (line[i])
+	fd = open(av, O_RDONLY);
+	while (1)
 	{
-		free(line[i]);
+		line = get_next_line(fd);
+		if (line == NULL)
+			break ;
+		free(line);
 		i++;
 	}
 	free(line);
+	close(fd);
+	return (i);
 }
 
-int	handle_input(int keycode, void *param)
+int	count_cols(char	*line)
 {
-	t_mlx_data *mlx = (t_mlx_data *)param;
+	int	i;
 
-	if (keycode == 65307) // ESC key
+	i = 0;
+	while (line[i] != '\0')
+		i++;
+	return (i);
+}
+
+void	player_position(t_game *game)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (i < game->map_rows)
 	{
-		ft_printf("ESC pressed. Exiting game.\n");
-		mlx_destroy_window(mlx->mlx_ptr, mlx->win_ptr);
-		exit(0);
+		j = 0;
+		while (j < game->map_cols)
+		{
+			if (game->map[i][j] == 'P')
+			{
+				game->pos_x = j;
+				game->pos_y = i;
+				break ;
+			}
+			j++;
+		}
+		i++;
 	}
+}
 
-	ft_printf("Keycode pressed: %d\n", keycode);
-	return (0);
+int	flood_fill(t_game *game, char **map, int x, int y)
+{
+	static int	collects;
+	static int	exits;
+
+	if (y < 0 || x < 0 || y > game->map_rows || x > game->map_cols
+		|| map[y][x] == '1' || map[y][x] == 'X')
+		return (0);
+	if (map[y][x] == 'E')
+	{
+		exits++;
+		map[y][x] = 'X';
+		return (0);
+	}
+	if (map[y][x] == 'C')
+		collects++;
+	map[y][x] = 'X';
+	flood_fill(game, map, x + 1, y);
+	flood_fill(game, map, x - 1, y);
+	flood_fill(game, map, x, y + 1);
+	flood_fill(game, map, x, y - 1);
+	if (exits == 1 && collects == game->collect)
+		return (1);
+	else
+		return (0);
 }
