@@ -1,26 +1,22 @@
-#Project Name
 NAME = so_long
 
-#Compiler &Flags
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -O3 -I. -Iminilibx-linux -I/usr/include
 
-#Linker Flags
 LFLAGS = -Lminilibx-linux -lmlx -L/usr/lib -lXext -lX11 -lm -lz
 
-#Directories
 SRC_DIR = src
 OBJ_DIR = obj
 LIBFT_DIR = libft
 INCLUDES = -Iinclude
-#Libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
-#Source &Object files
-SRCS = $(wildcard $(SRC_DIR)/*.c)
+
+
+SRCS_DIR = draw.c free.c game_and_events.c initialize.c main.c map_checker.c map_checker_structs.c player_moves.c player_moves_2.c utils.c
+SRCS = $(addprefix $(SRC_DIR)/, $(SRCS_DIR))
 OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
-# Rules
 all: $(NAME)
 
 $(NAME): $(OBJS) $(LIBFT)
@@ -42,6 +38,7 @@ clean:
 
 fclean: clean
 	$(RM) $(NAME)
+	$(RM) -r $(OBJ_DIR)
 	$(MAKE) -C $(LIBFT_DIR) fclean
 
 re: fclean all
